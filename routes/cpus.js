@@ -25,7 +25,7 @@ router.get('/:id', function(req, res) {
 
 router.post('/', function(req, res, next) {
   const newCpu = req.body;
-  cpuService.putItem('cpus', newCpu).then((result) => {
+  cpuService.putItem(newCpu).then((result) => {
     res.status(201).json(result);
   }, (error) => {
     console.error(error);

@@ -11,7 +11,7 @@ async function getItems() {
 
 async function getItem(id) {
     const mongo = new MongoDB();
-    const item =  await mongo.findItem(COLLECTION_NAME, { id: id });
+    const item =  await mongo.findItem(COLLECTION_NAME, { _id: id });
     mongo.close();
     return item;
 }

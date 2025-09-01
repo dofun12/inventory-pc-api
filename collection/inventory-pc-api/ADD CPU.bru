@@ -6,8 +6,31 @@ meta {
 
 post {
   url: http://localhost:3000/cpus/
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+    "name": "FX-8300",
+    "cores": 8,
+    "threads": 8,
+    "family":"FX-Series",
+    "series": "FX 8-Core Black Edition Processors",
+    "boostClock": 4.3,
+    "boostClockUnit":"GHz",
+    "baseClock":  3.3,
+    "boostClockUnit":"GHz",
+    "l1Cache": 0.384,
+    "l2Cache": 8,
+    "l3Cache": 8,
+    "cacheUnit": "MB",
+    "tdp": 95,
+    "tdpUnit": "W",
+    "socket": "AM3+",
+    "maxTemp": 70.5,
+    "tempUnit": "C"
+  }
 }
 
 settings {
