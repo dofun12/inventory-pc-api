@@ -23,6 +23,27 @@ router.get('/:id', function(req, res) {
   });
 });
 
+router.patch('/:id', function(req, res) {
+  const cpuId = req.params.id;
+  const updatedCpu = req.body;
+  cpuService.setItem(cpuId, updatedCpu).then((result) => {
+    res.json(result);
+  }, (error) => {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  });
+});
+
+router.delete('/:id', function(req, res) {
+  const cpuId = req.params.id;
+  cpuService.deleteItem(cpuId).then((result) => {
+    res.json(result);
+  }, (error) => {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  });
+});
+
 router.post('/', function(req, res, next) {
   const newCpu = req.body;
   cpuService.putItem(newCpu).then((result) => {

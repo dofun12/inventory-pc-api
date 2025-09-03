@@ -1,20 +1,38 @@
 const { MongoClient } = require("mongodb");
-
+require("dotenv").config();
 class MongoDB{
 
     constructor(){
         this.#getConnection();
     }
 
+    MONGO_URI = process.env.MONGO_URI;
+
     #getConnection() {
         // Replace the uri string with your connection string
-        const uri = "mongodb://root:root@192.168.15.101:27018/";
+        const uri = this.MONGO_URI;
         this.client = new MongoClient(uri);
         this.db = this.client.db('computerdb');
     }
 
     #getDB() {
         return this.db;
+    }
+
+    async setItem(collectionName, query, update) {
+        this.#getConnection();
+        const collection = this.#getDB().collection(collectionName);
+        const result = await collection.updateOne(query, { $set: update }, { upsert: false });
+        console.log(result);
+        this.close();
+    }
+
+    async deleteItem(collectionName, query) {
+        this.#getConnection();
+        const collection = this.#getDB().collection(collectionName);
+        const result = await collection.deleteOne(query);
+        console.log(result);
+        this.close();
     }
 
     async putItem(collectionName, item) {
